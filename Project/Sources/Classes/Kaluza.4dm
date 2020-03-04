@@ -14,6 +14,8 @@ Function allDependencyInstances()
 	$0:=This:C1470.dependencyInstances().concat(This:C1470.devDepencyInstances())
 	
 Function installDependencies()
+	C_OBJECT:C1216($0)
+	C_COLLECTION:C1488($results)
 	$results:=New collection:C1472()
 	This:C1470.allDependencyInstances().reduce("c_formula_this";$results;Formula:C1597(This:C1470.accumulator.push(This:C1470.value.install())))
 	
@@ -37,7 +39,7 @@ Function _buildDependencies()
 			For each ($path;$1)
 				$dependency:=cs:C1710.Dependency.new()
 				$dependency.path:=$path
-				$dependency.version:=$1[$name]
+				$dependency.version:=$1[$path]
 				$dependencies.push($dependency)
 				$dependency.parent:=This:C1470
 			End for each 

@@ -15,6 +15,7 @@ Function repository()
 	
 Function isInstalled()
 	C_BOOLEAN:C305($0)
+	C_OBJECT:C1216($componentsFolder)
 	$componentsFolder:=Folder:C1567(fk database folder:K87:14).folder("Components")
 	Case of 
 		: ($componentsFolder.file(This:C1470.repository()+".4DZ").exists)
