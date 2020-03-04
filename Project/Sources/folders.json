@@ -1,0 +1,15 @@
+﻿{
+	"model": {
+		"classes": [
+			"Dependency",
+			"Kaluza"
+		]
+	},
+	"tests": {
+		"methods": [
+			"test_install_github",
+			"test_kaluza"
+		]
+	},
+	"trash": {}
+}
