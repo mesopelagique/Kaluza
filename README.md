@@ -44,7 +44,7 @@ with files containing the dependencies
 {
   "name": "Name of my component",
   "dependencies": [
-    "mesopelagique/CollectionUtils"
+    "mesopelagique/CollectionUtils",
     "mesopelagique/ObjectClassMapper"
   ]
 }
