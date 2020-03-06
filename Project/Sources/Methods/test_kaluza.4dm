@@ -6,7 +6,7 @@ $kaluza.options:=New object:C1471("binary";False:C215;"submodule";True:C214)
   // $kaluza.dependencies:=New object("mesopelagique/CollectionUtils";Null;"mesopelagique/ObjectClassMapper";Null;"mesopelagique/NullCoaliescing";Null)
 $kaluza.dependencies:=New collection:C1472("mesopelagique/CollectionUtils";"mesopelagique/ObjectClassMapper";"mesopelagique/NullCoaliescing")
 
-$result:=$kaluza.installDependencies()
+$result:=$kaluza.installDependencies(New object:C1471("missing";True:C214))
 ASSERT:C1129($result.success;JSON Stringify:C1217($result))
 
 C_COLLECTION:C1488($dependencies)

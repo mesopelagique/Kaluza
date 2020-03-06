@@ -2,8 +2,16 @@
 Class extends Object
 
 Function install()
-	C_OBJECT:C1216($0)
+	C_OBJECT:C1216($0;$1)
 	$0:=install_github (This:C1470.path;This:C1470.parent.options)
+	
+Function installIfMissing()
+	C_OBJECT:C1216($0)
+	If (This:C1470.isInstalled())
+		$0:=New object:C1471("success";True:C214)
+	Else 
+		$0:=install_github (This:C1470.path;This:C1470.parent.options)
+	End if 
 	
 Function user()
 	C_TEXT:C284($0)

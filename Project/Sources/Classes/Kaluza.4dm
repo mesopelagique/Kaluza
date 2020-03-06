@@ -14,13 +14,16 @@ Function allDependencyInstances()
 	$0:=This:C1470.dependencyInstances().concat(This:C1470.devDepencyInstances())
 	
 Function installDependencies()
-	C_OBJECT:C1216($0)
+	C_OBJECT:C1216($0;$1)
 	C_COLLECTION:C1488($results)
 	$results:=New collection:C1472()
-	This:C1470.allDependencyInstances().reduce("c_formula_this";$results;Formula:C1597(This:C1470.accumulator.push(This:C1470.value.install())))
+	$options:=$1
+	
+	This:C1470.allDependencyInstances().reduce("c_formula_this";$results;Formula:C1597(This:C1470.accumulator.push(This:C1470.value.install($options))))
 	
 	$0:=New object:C1471("results";$results)
 	$0.success:=$results.reduce("c_formula_this";True:C214;Formula:C1597(This:C1470.accumulator & This:C1470.value.success))
+	
 	
 /**
 PRIVATE
