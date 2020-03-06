@@ -15,7 +15,7 @@ $result:=install_github ("mesopelagique/CollectionUtils")
 #### with options
 
 ```4d
-$result:=install_github ("mesopelagique/CollectionUtils";New object("binary";False;"submodule";True))
+$result:=install_github ("mesopelagique/CollectionUtils";New object("binary";False))
 ```
 
 |name|descriptions|default|
@@ -26,11 +26,34 @@ $result:=install_github ("mesopelagique/CollectionUtils";New object("binary";Fal
 
 ```4d
 $kaluza:=cs.Kaluza.new()
-$kaluza.options:=New object("binary";False;"submodule";True)
+$kaluza.options:=New object("binary";False)
 $kaluza.dependencies:=New collection("mesopelagique/CollectionUtils";"mesopelagique/ObjectClassMapper")
 
 $result:=$kaluza.installDependencies()
 ```
+
+### From file 
+
+```4d
+cs.Kaluza.new(Folder(fk database folder).file("component.json").installDependencies()
+```
+
+with files containing the dependencies
+
+```json
+{
+  "name": "Name of my component",
+  "dependencies": [
+    "mesopelagique/CollectionUtils"
+    "mesopelagique/ObjectClassMapper"
+  ]
+}
+```
+
+## TODO
+
+- [ ] Support specific version
+- [ ] Recursive dependencies
 
 ## Why Kaluza?
 
