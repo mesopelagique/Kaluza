@@ -1,6 +1,26 @@
 
 Class extends Object
 
+Class constructor
+	C_VARIANT:C1683($1)
+	If (Count parameters:C259>0)
+		If (Value type:C1509($1)=Is object:K8:27)
+			C_OBJECT:C1216($conf)
+			If (OB Class:C1730($1).name="File")  // load from file
+				$conf:=JSON Parse:C1218($1.getText())
+			Else 
+				$conf:=$1
+			End if 
+			C_TEXT:C284($key)
+			For each ($key;$conf)  // cppy?
+				This:C1470[$key]:=$conf[$key]
+			End for each 
+		Else 
+			  // unknown
+		End if 
+		
+	End if 
+	
 Function dependencyInstances()
 	C_COLLECTION:C1488($0)
 	$0:=This:C1470._buildDependencies(This:C1470.dependencies)

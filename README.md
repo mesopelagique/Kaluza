@@ -21,8 +21,6 @@ $result:=install_github ("mesopelagique/CollectionUtils";New object("binary";Fal
 |name|descriptions|default|
 |-|-|-|
 |binary| Use binary or not ie. 4DZ compiled file |`True`|
-|submodule| Use submodule (if not binary) instead of cloning |`False`|
-
 
 ### From object definition
 

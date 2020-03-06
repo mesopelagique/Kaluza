@@ -103,10 +103,12 @@ If (Not:C34($result.success))
 		$cmd:=$cmd+".exe"
 	End if 
 	
-	If (Bool:C1537($options.submodule))
+	C_BOOLEAN:C305($submodule)
+	$submodule:=Folder:C1567(fk database folder:K87:14).folder(".git").exists
+	If ($submodule)  // if already in git use submodule
 		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_CURRENT_DIRECTORY";Folder:C1567(fk database folder:K87:14).platformPath)
 		$cmd:=$cmd+" submodule -q add "+$result.url+".git 'Components/"+$outputFile.fullName+"'"  // -q quiet to not output progress in stderr
-	Else 
+	Else   // clone
 		$cmd:=$cmd+" clone -q "+$result.url+".git '"+$outputFile.path+"'"  // -q quiet to not output progress in stderr
 	End if 
 	LAUNCH EXTERNAL PROCESS:C811($cmd;$in;$out;$err)
