@@ -2,7 +2,8 @@
 	"model": {
 		"classes": [
 			"Dependency",
-			"Kaluza"
+			"Kaluza",
+			"Object"
 		]
 	},
 	"tests": {

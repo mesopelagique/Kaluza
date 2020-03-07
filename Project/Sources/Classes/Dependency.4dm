@@ -2,16 +2,17 @@
 Class extends Object
 
 Function install()
-	C_OBJECT:C1216($0;$1)
-	$0:=install_github (This:C1470.path;This:C1470.parent.options)
-	
-Function installIfMissing()
-	C_OBJECT:C1216($0)
-	If (This:C1470.isInstalled())
-		$0:=New object:C1471("success";True:C214)
+	C_OBJECT:C1216($0;$1;$options)
+	$options:=This:C1470.parent.options
+	If ($options=Null:C1517)
+		$options:=$1
 	Else 
-		$0:=install_github (This:C1470.path;This:C1470.parent.options)
+		For each ($key;NVL ($1;New object:C1471())
+			$options[$key]:=$1[$key]  // override. XXX need a deep copy if option inside obj
+		End for each 
 	End if 
+	
+	$0:=install_github (This:C1470.path;$options)
 	
 Function user()
 	C_TEXT:C284($0)

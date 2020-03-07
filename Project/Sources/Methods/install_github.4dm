@@ -8,10 +8,10 @@ If (Count parameters:C259=0)
 End if 
 If (Count parameters:C259>1)
 	$options:=$2
-Else 
+End if 
+If ($options=Null:C1517)
 	$options:=New object:C1471()
 End if 
-
   // default options
 If ($options.binary=Null:C1517)
 	$options.binary:=True:C214
@@ -59,8 +59,20 @@ End if  // subfolders not supported, to optimize 4d could support subfolder with
 $result.path:=$result.user+"/"+$result.repository
 $result.url:="https://github.com/"+$result.path  // remove any fioriture
 
+  // Check if already installed
+
+  //If (Bool($options.skipInstalled))
+C_OBJECT:C1216($dependency)
+$dependency:=cs:C1710.Dependency.new()
+$dependency.path:=$result.path
+
+If ($dependency.isInstalled())
+	$result:=New object:C1471("success";True:C214;"statusText";"Already installed";"hasInstalled";False:C215)
+End if 
+  //End if 
+
   // Try with binary
-If ($options.binary)
+If (Not:C34($result.success) & ($options.binary))
 	
 	C_TEXT:C284($binaryName;$binaryFormattedName)
 	$binaryName:=$result.repository+".4DZ"
@@ -82,6 +94,8 @@ If ($options.binary)
 	$result.success:=($httpResult=200)
 	
 	If ($result.success)  // success
+		$result.binary:=True:C214
+		$result.hasInstalled:=True:C214
 		$outputFile.setContent($response)
 	Else 
 		$result.errors:=New collection:C1472(New object:C1471("code";$httpResult;"message";"Failed to download"))
@@ -116,6 +130,9 @@ If (Not:C34($result.success))
 	If (Length:C16($err)>0)
 		$result.errors:=New collection:C1472($err)
 	Else 
+		$result.git:=True:C214
+		$result.submodule:=$submodule
+		$result.hasInstalled:=True:C214
 		$result.success:=True:C214
 	End if 
 	
