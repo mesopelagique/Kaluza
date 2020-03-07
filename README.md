@@ -4,7 +4,7 @@ Add a fifth dimension to your project by installing github components.
 
 ## Usage
 
-Use of the following methods to download 4d component base into your current `Components` folder.
+Use one of the following methods to download 4d component base into your current `Components` folder.
 
 ### Install a github component by code
 
@@ -32,7 +32,7 @@ $kaluza.dependencies:=New collection("mesopelagique/CollectionUtils";"mesopelagi
 $result:=$kaluza.installDependencies()
 ```
 
-### From file 
+### From file (automatically done at database start)
 
 ```4d
 cs.Kaluza.new(Folder(fk database folder).file("component.json").installDependencies()
@@ -53,7 +53,7 @@ with files containing the dependencies
 ## TODO
 
 - [ ] Support specific version
-- [ ] Recursive dependencies
+- [ ] Recursive dependencies
 
 ## Why Kaluza?
 
