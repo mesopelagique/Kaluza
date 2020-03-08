@@ -52,6 +52,7 @@ with files containing the dependencies
 
 ## TODO
 
+- [ ] CLI app https://github.com/mesopelagique/kaluza-cli
 - [ ] Support specific version
 - [ ] Recursive dependencies
 
