@@ -6,13 +6,23 @@ Add a fifth dimension to your project by installing github components.
 
 Use one of the following methods to download 4d component base into your current `Components` folder.
 
-### Install a github component by code
+### From configuration file
+
+Create a `component.json` file at your database root folder.
+
+💡 You can use [kaluza command line application](https://github.com/mesopelagique/kaluza-cli) to do that or see file content  in [From file section](#From-file)
+
+If Kaluza is installed and your database accept to send on start event to other components, the components dependencies will be installed at start.
+
+### By code
+
+#### Install a github component by code
 
 ```4d
 $result:=install_github ("mesopelagique/CollectionUtils")
 ```
 
-#### with options
+##### with options
 
 ```4d
 $result:=install_github ("mesopelagique/CollectionUtils";New object("binary";False))
@@ -22,7 +32,7 @@ $result:=install_github ("mesopelagique/CollectionUtils";New object("binary";Fal
 |-|-|-|
 |binary| Use binary or not ie. 4DZ compiled file |`True`|
 
-### From object definition
+#### From object definition
 
 ```4d
 $kaluza:=cs.Kaluza.new()
@@ -32,7 +42,7 @@ $kaluza.dependencies:=New collection("mesopelagique/CollectionUtils";"mesopelagi
 $result:=$kaluza.installDependencies()
 ```
 
-### From file (automatically done at database start)
+#### From file 
 
 ```4d
 cs.Kaluza.new(Folder(fk database folder).file("component.json").installDependencies()
@@ -52,7 +62,7 @@ with files containing the dependencies
 
 ## TODO
 
-- [ ] CLI app https://github.com/mesopelagique/kaluza-cli
+- [X] CLI app https://github.com/mesopelagique/kaluza-cli
 - [ ] Support specific version
 - [ ] Recursive dependencies
 
