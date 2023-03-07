@@ -1,0 +1,143 @@
+{
+	"$4d": {
+		"version": "1",
+		"kind": "form"
+	},
+	"windowSizingX": "variable",
+	"windowSizingY": "variable",
+	"windowMinWidth": 0,
+	"windowMinHeight": 0,
+	"windowMaxWidth": 32767,
+	"windowMaxHeight": 32767,
+	"rightMargin": 20,
+	"bottomMargin": 20,
+	"events": [
+		"onLoad",
+		"onPageChange",
+		"onValidate",
+		"onClick",
+		"onDoubleClick",
+		"onOutsideCall",
+		"onBeginDragOver",
+		"onDragOver",
+		"onDrop",
+		"onAfterKeystroke",
+		"onMenuSelect",
+		"onPluginArea",
+		"onAfterEdit",
+		"onTimer",
+		"onBoundVariableChange"
+	],
+	"windowTitle": "Current component information",
+	"destination": "detailScreen",
+	"pages": [
+		{
+			"objects": {
+				"Group Box1": {
+					"type": "groupBox",
+					"text": "General information",
+					"top": 12,
+					"left": 15,
+					"width": 481,
+					"height": 198
+				}
+			}
+		},
+		{
+			"objects": {
+				"Input": {
+					"type": "input",
+					"left": 115,
+					"top": 37,
+					"width": 364,
+					"height": 17,
+					"dataSource": "Form:C1466.kaluza.name",
+					"enterable": false
+				},
+				"Input1": {
+					"type": "input",
+					"left": 115,
+					"top": 74,
+					"width": 364,
+					"height": 65,
+					"dataSource": "Form:C1466.kaluza.description",
+					"enterable": false
+				},
+				"Text": {
+					"type": "text",
+					"text": "Name",
+					"top": 37,
+					"left": 22,
+					"width": 81,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"Text1": {
+					"type": "text",
+					"text": "Descrition\r",
+					"top": 73,
+					"left": 34,
+					"width": 70,
+					"height": 16,
+					"textAlign": "right"
+				},
+				"List Box": {
+					"type": "listbox",
+					"left": 17,
+					"top": 228,
+					"width": 478,
+					"height": 201,
+					"events": [
+						"onClick",
+						"onHeaderClick",
+						"onDataChange",
+						"onSelectionChange"
+					],
+					"listboxType": "collection",
+					"dataSource": "Form:C1466.kaluza.dependencies",
+					"columns": [
+						{
+							"header": {
+								"text": "Dependencies",
+								"name": "Header1"
+							},
+							"name": "Column1",
+							"footer": {
+								"name": "Footer1"
+							},
+							"dataSource": "This:C1470.value",
+							"width": 453
+						}
+					]
+				},
+				"Input2": {
+					"type": "input",
+					"left": 115,
+					"top": 151,
+					"width": 364,
+					"height": 17,
+					"dataSource": "Form:C1466.kaluza.author",
+					"enterable": false
+				},
+				"Text2": {
+					"type": "text",
+					"text": "Author",
+					"top": 151,
+					"left": 22,
+					"width": 81,
+					"height": 16,
+					"textAlign": "right"
+				}
+			}
+		}
+	],
+	"geometryStamp": 59,
+	"method": "method.4dm",
+	"editor": {
+		"activeView": "View 1",
+		"defaultView": "View 1",
+		"views": {
+			"View 1": {}
+		}
+	}
+}

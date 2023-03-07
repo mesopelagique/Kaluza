@@ -2,23 +2,23 @@
 Class extends Object
 
 Class constructor($input : Variant)
+	If (Count parameters:C259=0)
+		$input:=Folder:C1567(fk database folder:K87:14; *).file("component.json")
+	End if 
 	
-	If (Count parameters:C259>0)
-		If (Value type:C1509($input)=Is object:K8:27)
-			var $conf : Object
-			If (OB Class:C1730($input).name="File")  // load from file
-				$conf:=JSON Parse:C1218($input.getText())
-			Else 
-				$conf:=$input
-			End if 
-			var $key : Text
-			For each ($key; $conf)  // cppy?
-				This:C1470[$key]:=$conf[$key]
-			End for each 
+	If (Value type:C1509($input)=Is object:K8:27)
+		var $conf : Object
+		If (OB Class:C1730($input).name="File")  // load from file
+			$conf:=JSON Parse:C1218($input.getText())
 		Else 
-			// unknown
+			$conf:=$input
 		End if 
-		
+		var $key : Text
+		For each ($key; $conf)  // cppy?
+			This:C1470[$key]:=$conf[$key]
+		End for each 
+	Else 
+		// unknown
 	End if 
 	
 Function dependencyInstances() : Collection
