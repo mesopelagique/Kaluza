@@ -3,7 +3,6 @@
     "description": "Add a fifth dimension to your project. Install github components",
     "author": "Mesopelagique (Eric Marchand)",
     "dependencies": [
-      "mesopelagique/CollectionUtils",
       "mesopelagique/ObjectClassMapper"
     ],
     "options": {"binary": false}

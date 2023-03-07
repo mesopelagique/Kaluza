@@ -1,38 +1,36 @@
 
 Class extends Object
 
-Function install()
-	C_OBJECT:C1216($0;$1;$options)
-	$options:=This:C1470.parent.options
-	If ($options=Null:C1517)
-		$options:=$1
+Function install($options : Object) : Object
+	
+	If (This:C1470.parent.options=Null:C1517)
+		This:C1470.parent.options:=$options
 	Else 
-		For each ($key;NVL ($1;New object:C1471())
-			$options[$key]:=$1[$key]  // override. XXX need a deep copy if option inside obj
+		var $key : Text
+		For each ($key; ($options || New object:C1471()))
+			This:C1470.parent.options[$key]:=$options[$key]  // override. XXX need a deep copy if option inside obj
 		End for each 
 	End if 
 	
-	$0:=install_github (This:C1470.path;$options)
+	return install_github(This:C1470.path; $options)
 	
-Function user()
-	C_TEXT:C284($0)
-	$0:=Split string:C1554(This:C1470.path;"/")[0]
+Function user() : Text
+	return Split string:C1554(This:C1470.path; "/")[0]
 	
-Function repository()
-	C_TEXT:C284($0)
-	$0:=Split string:C1554(This:C1470.path;"/")[1]
+Function repository() : Text
+	return Split string:C1554(This:C1470.path; "/")[1]
 	
-Function isInstalled()
-	C_BOOLEAN:C305($0)
-	C_OBJECT:C1216($componentsFolder)
+Function isInstalled() : Boolean
+	
+	var $componentsFolder : 4D:C1709.Folder
 	$componentsFolder:=Folder:C1567(fk database folder:K87:14).folder("Components")
 	Case of 
 		: ($componentsFolder.file(This:C1470.repository()+".4DZ").exists)
-			$0:=True:C214
+			return True:C214
 		: ($componentsFolder.folder(This:C1470.repository()+".4dbase").exists)
-			$0:=True:C214
+			return True:C214
 		Else 
-			$0:=False:C215
+			return False:C215
 	End case 
 	
 /*

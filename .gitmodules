@@ -1,9 +1,3 @@
-[submodule "Components/CollectionUtils.4dbase"]
-	path = Components/CollectionUtils.4dbase
-	url = https://github.com/mesopelagique/CollectionUtils.git
 [submodule "Components/ObjectClassMapper.4dbase"]
 	path = Components/ObjectClassMapper.4dbase
 	url = https://github.com/mesopelagique/ObjectClassMapper.git
-[submodule "Components/NullCoaliescing.4dbase"]
-	path = Components/NullCoaliescing.4dbase
-	url = https://github.com/mesopelagique/NullCoaliescing.git
