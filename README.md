@@ -45,7 +45,7 @@ $result:=$kaluza.installDependencies()
 #### From file 
 
 ```4d
-cs.Kaluza.new(Folder(fk database folder).file("component.json").installDependencies()
+cs.Kaluza.new(Folder(fk database folder).file("component.json")).installDependencies()
 ```
 
 with files containing the dependencies
