@@ -13,10 +13,7 @@ Class constructor($input : Variant)
 		Else 
 			$conf:=$input
 		End if 
-		var $key : Text
-		For each ($key; $conf)  // cppy?
-			This:C1470[$key]:=$conf[$key]
-		End for each 
+		This:C1470.fill($conf)
 	Else 
 		// unknown
 	End if 
@@ -71,3 +68,9 @@ Function _buildDependencies($input : Variant)->$dependencies : Collection
 			End for each 
 			
 	End case 
+	
+Function save()
+	var $file : 4D:C1709.File
+	$file:=Folder:C1567(fk database folder:K87:14; *).file("component.json")
+	
+	$file.setText(JSON Stringify:C1217(This:C1470; *); "UTF-8-no-bom"; Line feed:K15:40)

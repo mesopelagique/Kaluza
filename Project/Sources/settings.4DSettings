@@ -1,7 +1,15 @@
-﻿<?xml version="1.0" encoding="UTF-8"?><preferences stamp="2">
+<?xml version="1.0" encoding="UTF-8"?><preferences stamp="3">
 	<com.4d>
 		<compiler>
 			<options compilation_path="3"/>
 		</compiler>
+		<server>
+			<network>
+				<options use_legacy_network_layer="true"/>
+			</network>
+		</server>
+		<database>
+			<misc mac_use_lf="true" no_bom="true" prefer_null_than_blank_values="true" standard_xpath="true"/>
+		</database>
 	</com.4d>
 </preferences>

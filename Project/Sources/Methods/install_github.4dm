@@ -63,7 +63,7 @@ var $dependency : cs:C1710.Dependency
 $dependency:=cs:C1710.Dependency.new()
 $dependency.path:=$result.path
 
-If ($dependency.isInstalled())
+If ($dependency.isInstalled)
 	$result:=New object:C1471("success"; True:C214; "statusText"; "Already installed"; "hasInstalled"; False:C215)
 End if 
 //End if 

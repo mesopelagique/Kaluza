@@ -15,5 +15,7 @@ ASSERT:C1129($result.success; JSON Stringify:C1217($result))
 var $dependency : Object
 For each ($dependency; $dependencies)
 	$dependency.install()
-	ASSERT:C1129($dependency.isInstalled(); "Not installed "+$dependency.toString())
+	ASSERT:C1129($dependency.isInstalled; "Not installed "+$dependency.toString())
 End for each 
+
+$kaluza.save()
