@@ -115,14 +115,22 @@ If (Not:C34($result.success))
 	End if 
 	
 	var $submodule : Boolean
-	$submodule:=Folder:C1567(fk database folder:K87:14).folder(".git").exists
+	$submodule:=Folder:C1567(fk database folder:K87:14; *).folder(".git").exists || Folder:C1567(fk database folder:K87:14; *).file(".git").exists
 	If ($submodule)  // if already in git use submodule
-		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_CURRENT_DIRECTORY"; Folder:C1567(fk database folder:K87:14).platformPath)
-		$cmd:=$cmd+" submodule -q add "+$result.url+".git 'Components/"+$outputFile.fullName+"'"  // -q quiet to not output progress in stderr
+		SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_CURRENT_DIRECTORY"; Folder:C1567(fk database folder:K87:14; *).platformPath)
+		$cmd:=$cmd+" submodule -q --force add "+$result.url+".git 'Components/"+$outputFile.fullName+"'"  // -q quiet to not output progress in stderr
 	Else   // clone
 		$cmd:=$cmd+" clone -q "+$result.url+".git '"+$outputFile.path+"'"  // -q quiet to not output progress in stderr
 	End if 
 	LAUNCH EXTERNAL PROCESS:C811($cmd; $in; $out; $err)
+	
+	
+	If (Position:C15("already exists in the index"; $err)>0)  // clean: this code do not support localized message from github
+		// do a reset of path (maybe just removed as submodule but not commited)
+		
+		// LAUNCH EXTERNAL PROCESS($cmd; $in; $out; $err)
+	End if 
+	
 	
 	If (Length:C16($err)>0)
 		$result.errors:=New collection:C1472($err)

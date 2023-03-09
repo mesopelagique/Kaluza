@@ -2,7 +2,6 @@
 Class extends Object
 
 Function install($options : Object) : Object
-	
 	If (This:C1470.parent.options=Null:C1517)
 		This:C1470.parent.options:=$options
 	Else 
@@ -16,6 +15,8 @@ Function install($options : Object) : Object
 	$remote:=This:C1470.remote
 	Case of 
 		: ($remote="github")
+			return install_github(This:C1470.path; $options)
+		: (($remote="http") && (Position:C15("https://github.com/"; This:C1470.path)=1))
 			return install_github(This:C1470.path; $options)
 		Else 
 			ASSERT:C1129(False:C215; "Install from remote type "+$remote+" with path "+String:C10(This:C1470.path)+" is not yet supported")
@@ -66,22 +67,50 @@ Function get fileSystemPath : Object
 	If ($componentsFolder.file(This:C1470.repository+".4DZ").exists)
 		return $componentsFolder.file(This:C1470.repository+".4DZ")
 	End if 
-	If ($componentsFolder.file(This:C1470.repository+".4dbase").exists)
-		return $componentsFolder.file(This:C1470.repository+".4dbase")
+	If ($componentsFolder.folder(This:C1470.repository+".4dbase").exists)
+		return $componentsFolder.folder(This:C1470.repository+".4dbase")
 	End if 
 	
 Function uninstall()
-	This:C1470.delete()
+	If (This:C1470.parent#Null:C1517)
+		This:C1470.parent.uninstallDependency(This:C1470)
+	End if 
 	
 Function delete()
 	var $componentsFolder : 4D:C1709.Folder
 	$componentsFolder:=Folder:C1567(fk database folder:K87:14; *).folder("Components")
 	
-	If ($componentsFolder.file(This:C1470.repository+".4DZ").exists)
-		$componentsFolder.file(This:C1470.repository+".4DZ").delete()
-	End if 
-	If ($componentsFolder.file(This:C1470.repository+".4dbase").exists)
-		$componentsFolder.file(This:C1470.repository+".4dbase").delete(fk recursive:K87:7)
+	var $submodule : Boolean
+	$submodule:=Folder:C1567(fk database folder:K87:14; *).folder(".git").exists || Folder:C1567(fk database folder:K87:14; *).file(".git").exists  // XXX here just support into git at base root
+	
+	If ($submodule)  // do git rm instead 
+		
+		var $cmd; $in; $out; $err : Text
+		$cmd:="git"
+		If (Is Windows:C1573)
+			$cmd:=$cmd+".exe"
+		End if 
+		
+		If ($componentsFolder.file(This:C1470.repository+".4DZ").exists)
+			
+			SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_CURRENT_DIRECTORY"; Folder:C1567(fk database folder:K87:14; *).platformPath)
+			LAUNCH EXTERNAL PROCESS:C811($cmd+" rm \""+File:C1566($componentsFolder.file(This:C1470.repository+".4DZ").platformPath; fk platform path:K87:2).path+"\""; $in; $out; $err)
+			
+		End if 
+		If ($componentsFolder.folder(This:C1470.repository+".4dbase").exists)
+			
+			SET ENVIRONMENT VARIABLE:C812("_4D_OPTION_CURRENT_DIRECTORY"; Folder:C1567(fk database folder:K87:14; *).platformPath)
+			LAUNCH EXTERNAL PROCESS:C811($cmd+" rm \""+Folder:C1567($componentsFolder.folder(This:C1470.repository+".4dbase").platformPath; fk platform path:K87:2).path+"\""; $in; $out; $err)
+			
+		End if 
+	Else 
+		
+		If ($componentsFolder.file(This:C1470.repository+".4DZ").exists)
+			$componentsFolder.file(This:C1470.repository+".4DZ").delete()
+		End if 
+		If ($componentsFolder.folder(This:C1470.repository+".4dbase").exists)
+			$componentsFolder.folder(This:C1470.repository+".4dbase").delete(fk recursive:K87:7)
+		End if 
 	End if 
 	
 /*
